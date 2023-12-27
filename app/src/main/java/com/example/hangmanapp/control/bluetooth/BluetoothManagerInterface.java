@@ -1,47 +1,49 @@
 package com.example.hangmanapp.control.bluetooth;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+
+import com.example.hangmanapp.view.gui.bluetooth.BluetoothClientFragment;
 
 import java.util.ArrayList;
 
 public interface BluetoothManagerInterface {
-    /**
-     * Returns a List of Bluetooth Devices that the device already knows.
-     * @return List<BluetoothDevice>
-     */
-    public List<BluetoothDevice> getKnownDevices();
 
     /**
-     * Returns a BroadcastReceiver used that can be used for device discovery.
-     * @return BroadcastReceiver
+     * Turns off Bluetooth if it's currently enabled.
      */
-    public BroadcastReceiver getBluetoothDeviceReceiver();
-
+    void disableBluetooth();
 
     /**
-     * Enables the discoverability of the device.
-     * @param activity
+     * Starts a server thread for accepting connections.
      */
-    public void enableDiscoverability(Activity activity);
+    void startServerThread();
 
     /**
-     * This method starts the bluetooth device discovery.
-     * @param activity
+     * Starts a client thread for connecting to a server.
+     *
+     * @param context Context
+     * @param device  Bluetooth device to connect to
      */
-    @SuppressLint("MissingPermission")
-    void discoverDevices(Activity activity);
+    void startConnectThread(Context context, BluetoothDevice device);
 
     /**
-     * Starts an accept Thread for Host device.
+     * Initiates a device discovery and updates the list of discovered Bluetooth devices.
+     *
+     * @param clientFragment Fragment that displays the list of discovered devices
      */
-    public void accept();
+    void scan(BluetoothClientFragment clientFragment);
 
     /**
-     * Starts a connect Thread for Client device.
-     * @param device
+     * Makes the device discoverable for a limited duration.
      */
-    public void connect(BluetoothDevice device);
+    void makeDiscoverable();
+
+    /**
+     * Returns the list of discovered Bluetooth devices.
+     *
+     * @return List of Bluetooth devices
+     */
+    ArrayList<BluetoothDevice> getBluetoothDeviceList();
 }
+

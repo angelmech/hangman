@@ -18,9 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HangmanApp"
-        tools:targetApi="31">
+        tools:targetApi="33">
+        <activity android:name=".view.gui.bluetooth.BluetoothActivity" />
         <activity
-            android:name=".view.gui.MainActivity"
+            android:name=".view.gui.lobby.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
