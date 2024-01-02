@@ -20,8 +20,8 @@ public class AcceptThread extends Thread {
 
     private Context context;
     private static final String TAG = "AcceptThread";
-    private final String APP_NAME = context.getString(R.string.app_name);
-    private final UUID APP_UUID = UUID.fromString(context.getString(R.string.app_uuid));
+    // private final String APP_NAME = context.getString(R.string.app_name);
+    //private final UUID APP_UUID = UUID.fromString(context.getString(R.string.app_uuid));
     private final BluetoothServerSocket serverSocket;
     private CommunicationThread communicationThread;
 
@@ -31,7 +31,9 @@ public class AcceptThread extends Thread {
         BluetoothServerSocket tmp = null;
         try {
             tmp = BluetoothAdapter.getDefaultAdapter().
-                    listenUsingRfcommWithServiceRecord(APP_NAME, APP_UUID);
+                    listenUsingRfcommWithServiceRecord(
+                            context.getString(R.string.app_name),
+                            UUID.fromString(context.getString(R.string.app_uuid)));
         } catch (IOException e) {
             Log.e(TAG, "Socket´s listen() method failed", e);
         }

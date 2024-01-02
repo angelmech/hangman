@@ -4,10 +4,12 @@ import static java.security.AccessController.getContext;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothManagerInterface btManager;
 
+    Button playbt;
+
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         this.btManager = new BluetoothManager(this, this);
 
 
-
+        playbt = findViewById(R.id.play);
+        playbt.setOnClickListener(this::openBluetoothLobby);
     }
+
 
     public void openBluetoothLobby(View view) {
         Intent intent = new Intent(this, BluetoothActivity.class);
